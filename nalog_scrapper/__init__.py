@@ -5,26 +5,27 @@ import pandas as pd
 import concurrent.futures
 from typing import List
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-def get_org_n(inns: List[str], results=[]):
+def get_org_n(inns: List[str]):
     '''
     Selenium balance sheet scrapper from bo.nalog.ru.
     :param inns: inn of organisations
     :param results: id of input organisations on this site
     :return:
     '''
-    options = Options()
+    options = FirefoxOptions()
     options.headless = True
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Firefox(options=options)
     ac = ActionChains(driver)
     driver.get("https://bo.nalog.ru/search?allFieldsMatch=false&period=2019&page=1")
     driver.implicitly_wait(10)
     ac.click().perform()
     search = driver.find_element(By.CSS_SELECTOR, "#search")
+    results = []
     for inn in inns:
         search.send_keys(inn, Keys.ENTER)
         search.clear()
