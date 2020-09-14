@@ -2,7 +2,7 @@ from typing import List, Optional
 
 import uvicorn as uvicorn
 from fastapi import FastAPI, Query
-from nalog_scrapper import *
+from nalog_scrapper import main
 
 app = FastAPI()
 
