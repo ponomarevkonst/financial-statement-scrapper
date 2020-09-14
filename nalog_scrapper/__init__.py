@@ -3,16 +3,23 @@ import zipfile
 import requests
 import pandas as pd
 import concurrent.futures
+from typing import List
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-def get_org_n(inns, results=[]):
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    driver = webdriver.Chrome(options=chrome_options)
+def get_org_n(inns: List[str], results=[]):
+    '''
+    Selenium balance sheet scrapper from bo.nalog.ru.
+    :param inns: inn of organisations
+    :param results: id of input organisations on this site
+    :return:
+    '''
+    options = Options()
+    options.headless = True
+    driver = webdriver.Chrome(options=options)
     ac = ActionChains(driver)
     driver.get("https://bo.nalog.ru/search?allFieldsMatch=false&period=2019&page=1")
     driver.implicitly_wait(10)
@@ -35,6 +42,9 @@ def get_org_n(inns, results=[]):
 
 
 def download_excel(org_n):
+    """
+    Downloader of zipped excel from bo.nalog.ru by site_id of organization.
+    """
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
     link = f'https://bo.nalog.ru/download/bfo/{org_n}?auditReport=false&balance=true&capitalChange=true&clarification=false&targetedFundsUsing=false&correctionNumber=0&financialResult=true&fundsMovement=true&type=XLS&period=2019'
     downloaded_zip = requests.get(link, headers=headers).content
@@ -45,6 +55,9 @@ def download_excel(org_n):
 
 
 def find_in(df, string_code, year, codes=0, years={}):
+    """
+    Searcher of the value of the needed balance sheet element by year.
+    """
     if string_code // 1000 == 1:
         years = {2019: 16, 2018: 22, 2017: 28}
         codes = 13
@@ -63,7 +76,7 @@ def find_in(df, string_code, year, codes=0, years={}):
     return negative * value
 
 
-def main(org_info):
+def process_file(org_info):
     excelfile = download_excel(org_info['id'])
     excel = pd.ExcelFile(excelfile)
     balance = pd.read_excel(excel, 'Balance')
@@ -80,16 +93,11 @@ def main(org_info):
         org_info.update({year: {'profit_margin': profit_margin(year), 'ebit_margin': ebit_margin(year), 'sales_margin': sales_margin(year), 'gross_margin': gross_margin(year), 'roe': roe(year)}})
     return org_info
 
-
-
-
+def main(inn_list): #['6704000505', '5321029508']
+    org_n_list = get_org_n(inn_list)
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        results = executor.map(process_file, org_n_list)
+    return list(results)
 
 if __name__ == '__main__':
-    org_n_list = get_org_n(['6704000505', '5321029508'])
-
-    with concurrent.futures.ProcessPoolExecutor() as executor:
-        results = executor.map(main, org_n_list)
-
-    for result in results:
-        print(result)
-
+    print(main(['6704000505', '5321029508']))
