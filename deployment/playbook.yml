@@ -1,0 +1,44 @@
+---
+- name: Deployer of project
+  hosts: all
+  become: yes
+  tasks:
+
+    - name: Install dependences
+      apt:
+        update_cache: yes
+        pkg:
+          - python3-pip
+          - git
+          - firefox
+
+    - name: Download geckodriver
+      get_url:
+        url: https://github.com/mozilla/geckodriver/releases/download/v0.27.0/geckodriver-v0.27.0-linux64.tar.gz
+        dest: /home/main/geckodriver-v0.27.0-linux64.tar.gz
+
+    - name: Untar geckodriver
+      unarchive:
+        src: /home/main/geckodriver-v0.27.0-linux64.tar.gz
+        dest: /usr/bin/
+        remote_src: yes
+
+    - name: Install latest setuptools and pip
+      shell: pip3 install -U setuptools pip
+
+    - name: Clone project
+      git:
+        repo: 'https://github.com/ponomarevkonst/nalog_scrapper'
+        dest: /home/main/nalog_scrapper
+        clone: yes
+
+    - name: Install requirements
+      pip:
+        requirements: /home/main/nalog_scrapper/requirments.txt
+        executable: pip3
+
+    - name: Allow all access to tcp port 80
+      ufw:
+        rule: allow
+        port: '80'
+        proto: tcp
