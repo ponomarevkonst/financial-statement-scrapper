@@ -1,3 +1,0 @@
-{"profit_margin": "f(2400, year) / f(2110, year)", "ebit_margin": "f(2300, year) / f(2110, year)",
-  "sales_margin": "f(2200, year) / f(2110, year)", "gross_margin": "f(2100, year) / f(2110, year",
-  "roe": "f(2400, year) / (f(1300, year) + f(1300, year-1))"}
