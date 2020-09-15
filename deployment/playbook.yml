@@ -11,6 +11,7 @@
           - python3-pip
           - git
           - firefox
+          - screen
 
     - name: Download geckodriver
       get_url:
@@ -23,14 +24,20 @@
         dest: /usr/bin/
         remote_src: yes
 
-    - name: Install latest setuptools and pip
-      shell: pip3 install -U setuptools pip
+    - name: Manually create the initial virtualenv
+      command:
+        cmd: virtualenv /user/home/venvs/nalog -p python3
+
+    - name: Manually install latest setuptools and pip
+        shell: pip3 install -U setuptools pip
+        virtualenv: /user/home/venvs/nalog
 
     - name: Clone project
       git:
         repo: 'https://github.com/ponomarevkonst/nalog_scrapper'
         dest: /home/main/nalog_scrapper
         clone: yes
+        update: yes
 
     - name: Install requirements
       pip:
@@ -42,3 +49,4 @@
         rule: allow
         port: '80'
         proto: tcp
+

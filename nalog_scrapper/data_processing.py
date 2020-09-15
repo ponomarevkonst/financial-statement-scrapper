@@ -1,11 +1,7 @@
 import pandas as pd
 
-formulas = {"profit_margin": "f(2400, year) / f(2110, year)", "ebit_margin": "f(2300, year) / f(2110, year)",
-            "sales_margin": "f(2200, year) / f(2110, year)", "gross_margin": "f(2100, year) / f(2110, year",
-            "roe": "f(2400, year) / (f(1300, year) + f(1300, year-1))"}
 
-
-class Fin_statments:
+class FinStatements:
     balance = None
     pnl = None
     capital_change = None
@@ -39,10 +35,4 @@ class Fin_statments:
             value = 0
         return negative * value
 
-    represent = lambda number: str(round(100 * number, 2)) + '%'
-    profit_margin = lambda year: self.represent(self.find_in(2400, year) / self.find_in(2110, year))
-    ebit_margin = lambda year: self.represent(self.find_in(2300, year) / self.find_in(2110, year))
-    sales_margin = lambda year: self.represent(self.find_in(2200, year) / self.find_in(2110, year))
-    gross_margin = lambda year: self.represent(self.find_in(2100, year) / self.find_in(2110, year))
-    roe = lambda year: self.represent(
-        self.find_in(2400, year) / (self.find_in(1300, year) + self.find_in(1300, year - 1)))
+
