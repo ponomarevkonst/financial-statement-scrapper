@@ -8,10 +8,11 @@
       apt:
         update_cache: yes
         pkg:
+          - python3.8
+          - python3.8-venv
           - python3-pip
           - git
           - firefox
-          - screen
 
     - name: Download geckodriver
       get_url:
@@ -24,13 +25,25 @@
         dest: /usr/bin/
         remote_src: yes
 
-    - name: Manually create the initial virtualenv
-      command:
-        cmd: virtualenv /user/home/venvs/nalog -p python3
+    - name: Remove geckodriver.tar
+      file:
+        path: /home/main/geckodriver-v0.27.0-linux64.tar.gz
+        state: absent
 
-    - name: Manually install latest setuptools and pip
-        shell: pip3 install -U setuptools pip
-        virtualenv: /user/home/venvs/nalog
+    - name: Install virtualenv via pip
+      pip:
+        name: virtualenv
+        executable: pip3
+
+    - name: Install latest setuptools and pip
+      pip:
+        name:
+          - setuptools
+          - pip
+          - wheel
+        state: latest
+        virtualenv: /home/main/venvs/nalog
+
 
     - name: Clone project
       git:
@@ -42,11 +55,14 @@
     - name: Install requirements
       pip:
         requirements: /home/main/nalog_scrapper/requirments.txt
-        executable: pip3
+        virtualenv: /home/main/venvs/nalog
 
-    - name: Allow all access to tcp port 80
+    - name: Allow all access to tcp port 5000
       ufw:
         rule: allow
-        port: '80'
+        port: '5000'
         proto: tcp
 
+    - name: Run server #fix it somehow
+      command:
+        cmd:  nohup /home/main/venvs/nalog/bin/python3 /home/main/nalog_scrapper/server.py
