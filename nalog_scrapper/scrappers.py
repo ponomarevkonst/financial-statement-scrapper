@@ -37,8 +37,3 @@ def get_org_n_from_nalog_ru(inns: List[str]):
             org_name = tree.xpath('//*[@id="root"]/main/div/div/div[2]/div[2]/a/div[1]/div[1]/span')[0].text
             results.append({'name': org_name, 'inn': inn, 'id': id})
     return results
-
-if __name__ == '__main__':
-    start = time.time()
-    print(get_org_n_from_nalog_ru(['7706107510', '5321029508', '6704000505']))
-    print(time.time()-start)
