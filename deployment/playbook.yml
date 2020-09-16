@@ -65,4 +65,4 @@
 
     - name: Run server #fix it somehow
       command:
-        cmd:  nohup /home/main/venvs/nalog/bin/python3 /home/main/nalog_scrapper/server.py
+        cmd:  screen /home/main/venvs/nalog/bin/python3 /home/main/nalog_scrapper/server.py
