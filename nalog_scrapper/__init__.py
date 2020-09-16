@@ -17,14 +17,8 @@ def process_file(org_info):
     return org_info
 
 
-def main(inn_list):  # ['6704000505', '5321029508']
+def main(inn_list): 
     org_n_list = get_org_n_from_nalog_ru(inn_list)
     with concurrent.futures.ProcessPoolExecutor() as executor:
         results = executor.map(process_file, org_n_list)
     return list(results)
-
-
-if __name__ == '__main__':
-    start = time.time()
-    print(main(['6704000505', '5321029508']))
-    print(time.time()-start)
