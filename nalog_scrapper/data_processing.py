@@ -28,11 +28,9 @@ class FinStatements:
         index = n.index[list(n).index(str(string_code))]
         value = df.iloc[index, year_column]
 
-        negative = -1 if value[0] == '(' else 1
+        negative = -1 if value[0] == '(' or value[0] == '-' else 1
         try:
             value = int("".join([x for x in value if x.isdigit()]))
         except:
             value = 0
         return negative * value
-
-
