@@ -1,4 +1,5 @@
 import concurrent.futures
+import time
 
 from nalog_scrapper.data_processing import FinStatements
 from nalog_scrapper.formulas import *
@@ -24,4 +25,6 @@ def main(inn_list):  # ['6704000505', '5321029508']
 
 
 if __name__ == '__main__':
-    print(main(['6704000505', '7706107510', '5321029508']))
+    start = time.time()
+    print(main(['6704000505', '5321029508']))
+    print(time.time()-start)
