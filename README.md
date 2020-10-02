@@ -10,6 +10,16 @@ Selenium based web scrapper for retrieving financial statements indexes.
       * Gross margin
       * ROE
       * more soon...
+      
+## Supports
+
+  - bo.nalog.ru
+  
+### TODO
+  
+  - SEC EDGAR
+  - UK Company House
+  - Rosstat
   
 ### Tech
 FS scrapper uses a number of open source projects to work properly:
