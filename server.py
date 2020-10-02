@@ -7,7 +7,7 @@ from nalog_scrapper import main
 app = FastAPI()
 
 
-@app.get("/nalogru/")
+@app.get("/bonalogru/")
 def read_items(inn: Optional[List[str]] = Query(['6704000505', '5321029508'])):
     return main(inn)
 
