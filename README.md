@@ -22,6 +22,14 @@ RASFS scrapper uses a number of open source projects to work properly:
 * Ansible - for quick deployment on your server
 
 ### Installation 
+RASFS scrapper requires python3 to run. You can install dependences by yourself or run setup.py.
 
+```sh
+$ python3 setup.py
+```
 
 ### Deployment
+This project has [Ansible Playbook](https://github.com/ponomarevkonst/RASFS-scrapper/blob/master/deployment/playbook.yml) for quick deployment on your server.
+```sh
+$ ansible-playbook deploymet/playbook.yml
+```
