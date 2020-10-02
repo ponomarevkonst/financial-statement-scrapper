@@ -29,7 +29,7 @@ $ python3 setup.py
 ```
 
 ### Deployment
-This project has [Ansible Playbook](https://github.com/ponomarevkonst/FS-scrapper/blob/master/deployment/playbook.yml) for quick deployment on your server.
+This project has [Ansible Playbook](https://github.com/ponomarevkonst/financial-statement-scrapper/blob/master/deployment/playbook.yml) for quick deployment on your server.
 ```sh
 $ ansible-playbook deploymet/playbook.yml
 ```
