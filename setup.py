@@ -11,7 +11,7 @@ setup(
     name='RASFS scrapper',
     version='',
     packages=['nalog_scrapper'],
-    url='https://github.com/ponomarevkonst/RASFS-scrapper',
+    url='https://github.com/ponomarevkonst/financial-statement-scrapper',
     license='MIT',
     author='Konstantin Ponomarev',
     author_email='ponomarevkonst@gmail.com',
