@@ -15,6 +15,6 @@ setup(
     license='MIT',
     author='Konstantin Ponomarev',
     author_email='ponomarevkonst@gmail.com',
-    description='Selenium based web scrapper for retrieving financial statements indexes from bo.nalog.ru.',
+    description='Selenium based web scrapper for retrieving financial statements indexes.',
     install_requires=get_requires()
 )
