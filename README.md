@@ -18,7 +18,7 @@ Selenium based web scrapper for retrieving financial statements indexes.
   
 ### TODO
   
-  - SEC EDGAR
+  - US SEC EDGAR
   - UK Company House
   - Rosstat
   
