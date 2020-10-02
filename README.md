@@ -11,7 +11,8 @@ Selenium based web scrapper for retrieving financial statements indexes.
       * ROE
       * more soon...
       
-## Supports
+## Resources 
+### Supports
 
   - bo.nalog.ru
   
@@ -21,7 +22,7 @@ Selenium based web scrapper for retrieving financial statements indexes.
   - UK Company House
   - Rosstat
   
-### Tech
+## Tech
 FS scrapper uses a number of open source projects to work properly:
 
 * FastAPI + uvicorn - for realy fast api creating
