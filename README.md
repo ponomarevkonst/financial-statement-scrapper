@@ -1,5 +1,5 @@
-# Russian Accounting Standards Financial Statement scrapper
-Selenium based web scrapper for retrieving financial statements indexes from bo.nalog.ru.
+# Financial Statement scrapper
+Selenium based web scrapper for retrieving financial statements indexes.
 
   1. Run FastAPI server
   2. Send request with id (INN, OKPO) of organisation 
@@ -12,7 +12,7 @@ Selenium based web scrapper for retrieving financial statements indexes from bo.
       * more soon...
   
 ### Tech
-RASFS scrapper uses a number of open source projects to work properly:
+FS scrapper uses a number of open source projects to work properly:
 
 * FastAPI + uvicorn - for realy fast api creating
 * Selenium - awesome web-scraping tool
@@ -22,14 +22,14 @@ RASFS scrapper uses a number of open source projects to work properly:
 * Ansible - for quick deployment on your server
 
 ### Installation 
-RASFS scrapper requires python3 to run. You can install dependences by yourself or run setup.py.
+FS scrapper requires python3 to run. You can install dependences by yourself or run setup.py.
 
 ```sh
 $ python3 setup.py
 ```
 
 ### Deployment
-This project has [Ansible Playbook](https://github.com/ponomarevkonst/RASFS-scrapper/blob/master/deployment/playbook.yml) for quick deployment on your server.
+This project has [Ansible Playbook](https://github.com/ponomarevkonst/FS-scrapper/blob/master/deployment/playbook.yml) for quick deployment on your server.
 ```sh
 $ ansible-playbook deploymet/playbook.yml
 ```
